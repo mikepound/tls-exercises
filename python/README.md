@@ -1,0 +1,4 @@
+# Python Exercises
+These exercises have been written and tested in Python 3.6 and 3.7. Support for TLS differs between versions of Python, I would recommend using the most recent version you can. If you need reliable TLS connections in an older version of python, you might consider the [pyOpenSSL](https://github.com/pyca/pyopenssl) project for TLS, and [Cryptography](https://github.com/pyca/cryptography) for X509 certificate management. These exercises can be run from the command line, but I used [PyCharm](https://www.jetbrains.com/pycharm/).
+
+Detailed instructions on each exercise will appear here shortly.

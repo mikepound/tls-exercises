@@ -1,0 +1,24 @@
+####
+## JAVA
+
+# Intellij
+java/.idea/
+java/*.iml
+java/*.iws
+
+# Maven
+java/log/
+java/target/
+
+####
+## PYTHON
+
+# Pycharm
+python/.idea/
+
+# Caching
+__pycache__/
+
+####
+## CA
+*.old
