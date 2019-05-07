@@ -3,14 +3,15 @@
 This is an example CA set up to serve certificates to the servers and clients in use within these exercises. There is currently one root certificate, one intermediate certificate, and then a handful of end entity certificates.
 
 ## Introduction
-### Directory Structure
+#### Directory Structure
 The root directory of the CA contains a number of directories:
+
 | Directory        | Description                                   |
 | ---------------- | --------------------------------------------- |
 | ca/certs/        | Any signed certificates with requested names  |
 | ca/newcerts/     | Signed certificates named by serial number    |
 | ca/private/      | Private key files                             |
-| ca/intermediate/ | The intermedia CA and its files               |
+| ca/intermediate/ | The intermediate CA and its files             |
 
 The `ca/private/` directory contains the most important part of the CA, the root certificates private key. Real CAs take extreme measures to protect this key!
 
@@ -25,7 +26,7 @@ The intermediate CA has a similar structure:
 | ca/intermediate/private/  | Private key files                             |
 | ca/intermediate/csr/      | Certificate signing requests for this int CA  |
 
-### The Signing Process
+#### The Signing Process
 
 Whenever a new certificate needs to be signed, there is a process:
 
@@ -33,7 +34,7 @@ Whenever a new certificate needs to be signed, there is a process:
 2) Generate a certificate signing request (CSR)
 3) Provide the CA with the above, at which point they will sign the certificate with their private key
 
-### Root and Intermediate Certificates
+#### Root and Intermediate Certificates
 All CAs have at least one root key pair. The private keys of these are so protected that they are used rarely, often stored on machine without a network connection, in a secured room. Typically `root certificates` have a long lifespan, and are used to sign a handful of `intermediate certificates`. These are used to perform actual day to day signing activities, usually through automated systems. Using intermediate certificates allows us to revoke them if they are compromised. It's simply a form of delegation, and means the highly protected root keys can be kept safe unused.
 
 ## Setting up the CA
@@ -150,19 +151,28 @@ openssl ca -config intermediate/openssl.cfg -extensions server_cert -days 375 -n
 ## Other Useful Commands
 OpenSSL has a great many features, here are some useful ones:
 
-**Examine a certificate**
+Examine a certificate
 
 ```
-openssl
+openssl x509 -noout -text -in server.cert.pem
 ```
 
-**Copy a certificate to a different format (e.g. DER)**
+Copy a certificate to a different format (e.g. DER)
 ```
 openssl x509 -in server.cert.pem -out server.cert.cer
 ```
 
-**Copy a certificate and key into a pkcs12 file.** Useful for a few things, notably importing into a java keystore
+Copy a certificate and key into a pkcs12 file. Useful for a few things, notably importing into a java keystore
 ```
 openssl pkcs12 -export -in server.cert.pem -inkey server.key.pem
     -name "server" -out server.p12
 ```
+
+Verify a certificate chain
+```
+openssl verify -CAfile ca-chain.cert.pem server.cert.pem
+
+server.cert.pem: OK
+```
+
+Note that the ca-chain file will contain both the root and intermediate keys. Or any keys necessary to complete the chain.
