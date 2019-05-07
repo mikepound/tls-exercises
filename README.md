@@ -2,7 +2,7 @@
 
 These exercises are associated with my course on Transport Layer Security (TLS). This course is delivered via O'Reilly Live Training. When not teaching online I am a lecturer at the University of Nottingham, and appear on YouTube.
 
-- [O’Reilly live training](https://www.oreilly.com/live-training/)
+- [O’Reilly live training](https://www.oreilly.com/live-training/courses/expert-transport-layer-security-tls/0636920282907)
 - [My university page](https://www.nottingham.ac.uk/research/groups/cvl/people/michael.pound)
 - [Computerphile](https://youtube.com/computerphile)
 
