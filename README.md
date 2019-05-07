@@ -11,6 +11,15 @@ Exercises are available in either Python or Java, depending on which language yo
 
 **Note:** The focus of these exercises is an introduction in TLS, not a lesson in production ready code! With this in mind, I've kept unnecessary structure and error correcting code to a minimum. It's quite possible to produce exceptions, use these as a guide to find out what requires fixing.
 
+## The Exercises
+There are three exercises involving different client-server communications. In each case you have some or all of both the client and server implementations, and you must either fix or add to the existing code.
+
+**Exercise 1:** You have a working server, and some of a client implementation. You need to add the remaining SSL code necessary to get the two programs communicating. Once this is done, you should add some code to ensure only the most recent ciphers and protocols are negotiated between the parties.
+
+**Exercise 2:** You have working client and server implementations. You need to alter both in order to create a mutually authenticated session. That is, one in which the client is also authenticated using a certificate
+
+**Exercise 3:** You have a working server and client, but a second "imposter" server exists that also has a valid certificate from the CA. You need to implement pinning on the original certificate in order to verify which server is the real one.
+
 ## Materials
 The repository contains a number of subfolders, most contain their own readme file with more detailed information.
 ### Python
