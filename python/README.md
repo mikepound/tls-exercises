@@ -59,7 +59,7 @@ openssl rsa -in client.key.pem -noout -text
 openssl x509 -in client.intermediate.chain.pem -noout -text
 ```
 
-## Exercise 3
+## Exercise 3: Certificate Pinning
 In this exercise there are two possible servers, one acting as an imposter. Both servers have valid certificates - perhaps a private key got leaked - but in any case we want to configure the client to only accept a single certificate. This is called pinning. The client and servers use this connection to send a fictitious banking record. The pickle module allows us to serialise objects as bytes for transmission over a network.
 
 #### The Client
