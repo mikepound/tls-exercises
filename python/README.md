@@ -9,7 +9,7 @@ The client is less complete, at the start of the exercise it has code missing, s
 #### Part 1: Connecting with the client
 The client doesn't have a working socket implementation. To begin you need to create a new `socket.socket`, create an `SSLContext` with appropriate configuration, and then use this to wrap the socket into an `SSLSocket`.
 
-While you work, it'd be useful to have the [socket](https://docs.python.org/3.6/library/socket.html) and [ssl](https://docs.python.org/3.6/library/ssl.html) documentation. You can now either get stuck in using the existing code and documentation, or follow along below for a little more advice.
+While you work, it'd be useful to have the [socket](https://docs.python.org/3.6/library/socket.html) and [ssl](https://docs.python.org/3.6/library/ssl.html) documentation to hand. You can now either get stuck in using the existing code and documentation, or follow along below for a little more advice.
 
 1) Begin by creating a new socket using the `socket.socket()` function. Make sure it's of the `AF_INET` type.
 2) Obtain the default ssl context via the `ssl.create_default_context()` function. The purpose for this one is to authenticate servers: `ssl.Purpose.SERVER_AUTH`.
@@ -43,7 +43,7 @@ The server needs to request a certificate from the client. Make use of the [docu
 
 If you run the server and client now, you'll find the server should reject the client as it doesn't provide a certificate.
 
-#### Part 2: The Server
+#### Part 2: The Client
 
 Setting up the client to provide a certificate is the same code the server already contains to provide its own.
 
@@ -69,7 +69,7 @@ Python's `ssl` library doesn't let us hook into the TLS validation function, so 
 
 1) Load the pinned hash of the server's real certificate into a bytes array. This is a standard file `open` in `rb` mode.
 2) After `connect()`, use `getpeercert()` to obtain the server's cerificate. Ensure the parameter `binary_form` is true, as this returns a DER encoded certficate, which is what was pinned.
-3) Hash the binary certificate and compare this to the hash you loaded. If they don't match, raise an `ssl.CertificateError`!
+3) Hash the binary certificate using SHA256 and compare this to the hash you loaded. If they don't match, raise an `ssl.CertificateError`!
 
 You'll now find that the imposter server is rejected, but the original server works fine.
 
