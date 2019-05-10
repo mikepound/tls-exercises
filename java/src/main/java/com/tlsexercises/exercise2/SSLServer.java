@@ -41,7 +41,7 @@ public class SSLServer {
             ServerSocketFactory ssf = SSLServerSocketFactory.getDefault();
             SSLServerSocket socket = (SSLServerSocket) ssf.createServerSocket(LOCAL_PORT);
 
-            // Part 1b
+            // Part 1
             // Add code here to enable client-side authentication. The server will then request the client
             // certificate during the handshake
             //

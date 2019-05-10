@@ -68,11 +68,7 @@ public class SSLClient {
                 defaultTrustManager.checkServerTrusted(chain, authType);
 
                 // Part 1: Client
-                // Both the regular and "imposter" servers have certificates signed by the CA. This means the
-                // best way to limit connections to a *single* server is to pin its certificate.
-                //
-                // This class has wrapped the default implementation of X509TrustManager, which is responsible
-                // for verifying certificates. Here you need to add hashing validation against the received
+                // Here you need to add hashing validation against the received
                 // certificate, comparing it to the hash you have on file in 'pinned.hash'.
 
                 // For help check out:
