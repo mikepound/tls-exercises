@@ -56,7 +56,7 @@ keytool -list -keystore ClientKeyStore.jks
 keytool -list -v keystore ClientTrustStore.jks
 ```
 
-Notice that the trust store only contains the root certificate, while the key store contains the entire chain.
+Notice that the trust store only contains the root certificate, while the key store contains the chain up to the root.
 
 ## Exercise 3: Certificate Pinning
 In this exercise there are two possible servers, one acting as an imposter. Both servers have valid certificates - perhaps a private key got leaked - but in any case we want to configure the client to only accept a single certificate. This is called pinning. The client and servers use this connection to send a fictitious banking record. This is implemented using a serialisable class, and Object streams.
