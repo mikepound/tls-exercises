@@ -20,12 +20,11 @@ def main():
 
     # Create SSL context which holds the parameters for any sessions
     context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
-    context.check_hostname = False
     context.load_verify_locations(CA_CERT)
     context.load_cert_chain(certfile=CLIENT_CERT_CHAIN, keyfile=CLIENT_KEY)
 
     # We can wrap in an SSL context first, then connect
-    conn = context.wrap_socket(sock, server_hostname=LOCAL_HOST)
+    conn = context.wrap_socket(sock, server_hostname="Expert TLS Server")
     try:
         # Handshake - conn is an SSLSocket
         conn.connect((LOCAL_HOST, LOCAL_PORT))

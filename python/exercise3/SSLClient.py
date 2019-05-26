@@ -25,7 +25,7 @@ def main():
     context.load_verify_locations(CA_CERT)
 
     # We can wrap in an SSL context first, then connect
-    conn = context.wrap_socket(sock, server_hostname=LOCAL_HOST)
+    conn = context.wrap_socket(sock, server_hostname="Expert TLS Server")
     try:
         # Handshake - conn is an SSLSocket
         conn.connect((LOCAL_HOST, LOCAL_PORT))

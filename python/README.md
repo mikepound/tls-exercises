@@ -13,10 +13,9 @@ While you work, it'd be useful to have the [socket](https://docs.python.org/3.6/
 
 1) Begin by creating a new socket using the `socket.socket()` function. Make sure it's of the `AF_INET` type.
 2) Obtain the default ssl context via the `ssl.create_default_context()` function. The purpose for this one is to authenticate servers: `ssl.Purpose.SERVER_AUTH`.
-3) You'll want to set `check_hostname` to false, as our hostname is meaningless in this exercise.
-4) Continuing with the context, load the CA certificate via the `context.load_verify_locations()` function. This ensures that the client knows which root certificate to validate against.
-5) Now we need a connection. Wrap the original socket into an SSLSocket using `context.wrap_socket()` (see [documentation](https://docs.python.org/3.6/library/ssl.html#ssl.SSLContext.wrap_socket)). We're calling this socket `conn`.
-6) Inside the try-catch block, make use of the sockets `connect()` function, which will expect a tuple containing the hostname and port defined at the top of the file.
+3) Continuing with the context, load the CA certificate via the `context.load_verify_locations()` function. This ensures that the client knows which root certificate to validate against.
+4) Now we need a connection. Wrap the original socket into an SSLSocket using `context.wrap_socket()` (see [documentation](https://docs.python.org/3.6/library/ssl.html#ssl.SSLContext.wrap_socket)). We're calling this socket `conn`. Note: You'll need to set the `server_hostname` parameter, which must match the incoming certificate hostname of "Expert TLS Server"
+5) Inside the try-catch block, make use of the sockets `connect()` function, which will expect a tuple containing the hostname and port defined at the top of the file.
 
 Don't forget to start the server, too! With any luck, this should now connect nicely.
 
@@ -39,7 +38,7 @@ In this exercise both the client and server already work, but we are only authen
 The server needs to request a certificate from the client. Make use of the [documentation](https://docs.python.org/3.6/library/ssl.html#ssl.SSLContext).
 
 1) Within the server `__init__` the context is configured. Add code to set the `verify_mode` to `ssl.CERT_REQUIRED`.
-2) Provide the server with the root CA certificate to be able to validate the client certificate when it arrives. It's already in the resource folder for the server. Define it as a resource at the top, then use the load_verify_locations() function to provide it.
+2) Provide the server with the root CA certificate to be able to validate the client certificate when it arrives. It's already in the resource folder for the server. Define it as a resource at the top, then use the `load_verify_locations()` function to provide it.
 
 If you run the server and client now, you'll find the server should reject the client as it doesn't provide a certificate.
 
@@ -60,7 +59,7 @@ openssl x509 -in client.intermediate.chain.pem -noout -text
 ```
 
 ## Exercise 3: Certificate Pinning
-In this exercise there are two possible servers, one acting as an imposter. Both servers have valid certificates - perhaps a private key got leaked - but in any case we want to configure the client to only accept a single certificate. This is called pinning. The client and servers use this connection to send a fictitious banking record. The pickle module allows us to serialise objects as bytes for transmission over a network.
+In this exercise there are two possible servers, one acting as an imposter. Both servers have valid certificates - perhaps a private key got leaked - but in any case we want to configure the client to only accept a single certificate. This is called pinning. The client and servers use this connection to send a fictitious banking record. The pickle module allows us to serialise objects as bytes for transmission over a network. *Note:* We've disabled hostname checking for this one; the imposter server has a different common name for clarity, normally any attacker who forged a certificate would use the original host name. 
 
 #### The Client
 In this part you might like to use the python `hashlib` [documentation](https://docs.python.org/3/library/hashlib.html#hash-algorithms) if you're not familiar with it. As before the ssl documentation is [here](https://docs.python.org/3.6/library/ssl.html). If you look at the top you'll see I've defined `PINNED_FILE` which is a 32 byte binary file containing a hash of the servers certificate that was calculated ahead of time. We're going to compare these bytes with a hash of the incoming server certificate. 
