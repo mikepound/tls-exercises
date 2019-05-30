@@ -1,3 +1,4 @@
 V	200506174741Z		1000	unknown	/C=GB/ST=England/O=Expert TLS/OU=IT Training/CN=Expert TLS Server
 V	200506175024Z		1001	unknown	/C=GB/ST=England/O=Expert TLS/OU=IT Training/CN=Expert TLS Client
 V	200502141718Z		1002	unknown	/C=GB/ST=England/O=Expert TLS/OU=IT Training/CN=Expert TLS Imposter
+V	200608232103Z		1003	unknown	/C=GB/ST=England/O=Expert TLS Ed/OU=IT Training/CN=Expert TLS Server

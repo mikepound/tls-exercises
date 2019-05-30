@@ -176,3 +176,32 @@ server.cert.pem: OK
 ```
 
 Note that the ca-chain file will contain both the root and intermediate keys. Or any keys necessary to complete the chain.
+
+## Ed25519 Certificates
+Edward's curve certificates use a form of elliptic-curve cryptography. Signatures based on them are modern, efficient, and secure. There is one Ed25519 server certificate signed in the repository. It's not used during the exercises, it's purely here as an example. They make a good option as long as the connecting clients support them. These are the commands I used to generate the certificate:
+
+Generate a key pair
+```
+openssl genpkey -algorithm ed25519 -aes256
+    -out intermediate/private/server.ed25519.key.pem
+```
+
+Create a CSR
+```
+openssl req -config intermediate/openssl.cfg
+    -key intermediate/private/server.ed25519.key.pem
+    -new -sha256 -out intermediate/csr/server.ed25519.csr.pem
+```
+
+Sign using the intermediate CA
+```
+openssl ca -config intermediate/openssl.cfg -extensions server_cert -days 375
+    -notext -md sha256 -in intermediate/csr/server.csr.pem
+    -out intermediate/certs/server.cert.pem
+```
+
+Create a DER encoded version of the certificate too
+```
+openssl x509 -in intermediate\certs\server.ed25519.cert.pem
+    -out intermediate\certs\server.ed25519.cert.der
+```
