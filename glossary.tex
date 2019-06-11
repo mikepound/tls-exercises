@@ -1,0 +1,108 @@
+\documentclass{article}
+ 
+ 
+\usepackage[margin=2cm]{geometry}
+\usepackage[nonumberlist,seeautonumberlist]{glossaries}
+ 
+% Glossary definitions
+\newglossary*{crypto}{Cryptography}
+\newglossary*{pki}{Public Key Infrastructure}
+\newglossary*{tls}{Transport Layer Security} 
+ 
+% Generate glossaries
+\makeglossaries
+ 
+\title{Glossary}
+ 
+\begin{document}
+
+\section*{\Huge Glossary}
+
+% Cryptography
+\newglossaryentry{c:aead}{type=crypto, name={AEAD}, description={Authenticated Encryption with Associated Data. A modern mode of encryption that provides in-built authenticity, usually via the computation of a MAC that is computed over the message or ciphertext, and additional data that requires protection. Modern algorithms that support this are AES-GCM and ChaCha20}}
+\newglossaryentry{c:aes}{type=crypto, name={AES}, description={The Advanced Encryption Standard. The most commonly used block cipher. The Rijndael algorithm was developed by researchers in Belgium as a response to a NIST call for replacements for DES}}
+\newglossaryentry{c:asym}{type=crypto, name={Asymmetric Encryption}, description={Encryption that uses two keys, one for encryption and one for decryption. Traditionally only one of the keys is kept private}}
+\newglossaryentry{c:chacha}{type=crypto, name={ChaCha20}, description={A modern stream cipher, often paired with the Poly1305 MAC. Uses only basic CPU operations, and as such is extremely fast on modern devices, particularly phones. Used as standard on Android phones when connecting to Google servers. It is also an available cipher suite in TLS}}
+\newglossaryentry{c:gcm}{type=crypto, name={Galois Counter Mode}, description={A modern mode of operation often seen used with AES. GCM is similar to counter mode, but also computes a message authentication code or GMAC over the data, ensuring message authenticity}}
+\newglossaryentry{c:hash}{type=crypto, name={Hash Function}, description={A function that takes a message of any length, and returns a message of a fixed size. Used frequently in message authentication codes and digital signatures. Also sometimes used to secure passwords, and to derive keys from shared secrets like Diffie-Hellman output}}
+\newglossaryentry{c:kdf}{type=crypto, name={KDF}, description={Key derivation function. Any (normally hash-based) algorithm for converting a pre-master secret into an actual key}}
+\newglossaryentry{c:hmac}{type=crypto, name={HMAC}, description={An improved structure for a MAC, using two derived keys and two applications of a hash function. Used as part of the KDF in TLS}}
+\newglossaryentry{c:iv}{type=crypto, name={IV}, description={Initialisation Vector. A random string that is not secret, and used to provide randomness. Usually it is required that IVs may repeat (at random), but should be strongly random and as such, unpredictable}}
+\newglossaryentry{c:key}{type=crypto, name={Key}, description={The secret component of most ciphers. A string of bytes that are used to alter the output of a cipher, such that it cannot be reversed without possessing those same bytes}}
+\newglossaryentry{c:kex}{type=crypto, name={Key Exchange}, description={A protocol that allows two parties to generate or share a secret key over an insecure channel}}
+\newglossaryentry{c:mac}{type=crypto, name={Message Authentication Code (MAC)}, description={A tag appended to a message that provides authenticity. A shared secret is combined with the message and hashed, to provide a tag that is able to verify whether a message has been changed}}
+\newglossaryentry{c:mode}{type=crypto, name={Mode of Operation}, description={A protocol within which a block cipher is used, in order to facilitate the encryption of messages of arbitrary lengths. Modern modes of operation often provide useful features beyond the core block cipher, such as message authentication}}
+\newglossaryentry{c:nonce}{type=crypto, name={Nonce}, description={A "number used once". A string of bytes that are used once in combination with a key, to provide different permutations (e.g. a random keystream) as required. Seen in TLS in any counter mode, including modern AEAD ciphers}}
+\newglossaryentry{c:pad}{type=crypto, name={Padding}, description={Additional bytes added to a message as required to bring the message to the required size of a block cipher or hash function}}
+\newglossaryentry{c:poly}{type=crypto, name={Poly1305}, description={A modern MAC that is often used with ChaCha20. It's name is derived from the polynomial function used within it, $2^{130}-5$}}
+\newglossaryentry{c:pk}{type=crypto, name={Public-key Cryptography}, description={Another term that is commonly used to refer to asymmetric encryption, but also encompases key exchange mechanisms such as Diffie-Hellman}}
+\newglossaryentry{c:ecdsa}{type=crypto, name={ECDSA}, description={Elliptic curve variant of DSA. Much more efficient and secure, likely to see increased use as it offers more security than RSA for shorter key lengths}}
+\newglossaryentry{c:dsa}{type=crypto, name={DSA}, description={Digital Signature Algorithm. An alternative to RSA based on different mathematics. Support for this has waned, and usually only allows for the use of 1024 bit keys, which is not enough. The elliptic curve variant ECDSA is much preferred}}
+\newglossaryentry{c:rsa}{type=crypto, name={RSA}, description={The most commonly used public-key cryptographic system. Provides a public and private key pair, either of which can be used for encryption, with the other reversing this process. RSA is used for encryption and for signing. RSA is based around the difficulty of solving the integer factorisation problem}}
+\newglossaryentry{c:sha1}{type=crypto, name={SHA-1}, description={A hash function with a 160-bit block size. Still secure within structures like HMAC, but a collision has been found, so security advice is to move toward SHA-2 at this point}}
+\newglossaryentry{c:sha2}{type=crypto, name={SHA-2}, description={Very similar to SHA-1, but with a 256 or 512-bit block size. This increased block size makes collisions much more difficult, and this function is currently considered secure}}
+\newglossaryentry{c:sha3}{type=crypto, name={SHA-3}, description={An alternative to SHA-2, should a serious vulnerability with SHA-2 be found. Offers similar hash lengths, but the function itself is very different to SHA-1 and SHA-2}}
+\newglossaryentry{c:ed448}{type=crypto, name={Ed448}, description={A new elliptic-curve based signature algorithm offering 224 bits of security. A specific instance of ECDSA}}
+\newglossaryentry{c:ed25519}{type=crypto, name={Ed25519}, description={A new elliptic-curve based signature algorithm offering 128 bits of security. Fast and secure, it is seeing increased use. A specific instance of ECDSA}}
+\newglossaryentry{c:sigs}{type=crypto, name={Digital Signature}, description={A message signed (encrypted by) the private key of a key pair. This key is usually associated with a public key certificate}}
+\newglossaryentry{c:sym}{type=crypto, name={Symmetric Encryption}, description={Encryption that uses a single key for both encryption and decryption}}
+
+% Public Key Infrastructure
+\newglossaryentry{p:baseline}{type=pki, name={Baseline Requirements}, description={A set of technical and policy requirements that Cas must adhere to. Most root store programs enfore these in order for a CAs root certificate to be trusted}}
+\newglossaryentry{p:ca}{type=pki, name={Certification Authority}, description={Commonly called a Certificate Authority (CA). An organisation that issues signed certificates}}
+\newglossaryentry{p:cert}{type=pki, name={Certificate}, description={A file in a standard format that contains, among other things, a public key and identifying information about the owner}}
+\newglossaryentry{p:ext}{type=pki, name={Certificate Extension}, description={An optional extension to the standard certificate format. Usually used to add functionality at a later date}}
+\newglossaryentry{p:chain}{type=pki, name={Certificate Chain}, description={A chain of intermediate certificates leading from an end entity (leaf certificats to a trusted root certificate}}
+\newglossaryentry{p:crit}{type=pki, name={Critical Extension}, description={A certificate extension, but marked such that failure to parse should be grounds to reject this certificate. For example, if a client does not understand this extension}}
+\newglossaryentry{p:crl}{type=pki, name={Certificate Revocation List (CRL)}, description={A list of revoked certificates distributed by a CA}}
+\newglossaryentry{p:csr}{type=pki, name={Certificate Signing Request (CSR)}, description={A signed file in a standard format that incudes data required by a CA to issue a certificate. Typically, a public key and subject identifying information. Other information on the resulting certificate will be generated by the CA}}
+\newglossaryentry{p:store}{type=pki, name={Certificate Store / Trust Store}, description={A list of trusted root certificates. Operating systems manage these trust stores, along with Mozilla, and some browsers. Many other browsers and programs rely on the OS trust stores}}
+\newglossaryentry{p:cn}{type=pki, name={Common Name (CN)}, description={The name of the subject of this certificate. For end entity certificates this will usually be a domain name. For intermediate and root certificates this will be a human readable name}}
+\newglossaryentry{p:dv}{type=pki, name={Domain Validated (DV) Certificates}, description={Certificates for which the subject has demonstrated control over the domain in the CN field. This is verified by the CA}}
+\newglossaryentry{p:ev}{type=pki, name={Extended Validation (EV) Certificates}, description={Similar to an OV certificate, but with more stringent checks on the validation of the organisation}}
+\newglossaryentry{p:int}{type=pki, name={Intermediate Certificate}, description={A certificate that signs end entity certificates or other intermediate certificates. These are used to prevent the root keys being required regularly}}
+\newglossaryentry{p:issuer}{type=pki, name={Issuer}, description={A field on a certificate indicating the name of the certificate that signed it}}
+\newglossaryentry{p:ocsp}{type=pki, name={OCSP}, description={A response signed by a CA indicating that a specific certificate is valid. May be used by a client to verify a certificate has not been revoked}}
+\newglossaryentry{p:stapling}{type=pki, name={OCSP Stapling}, description={The process of a server sending an OCSP response with its certificate, such that the client does not have to perform this task themselves. Uses the TLS Certificate Status Request extension}}
+\newglossaryentry{p:ov}{type=pki, name={Organisation Validation (OV) certificates}, description={Certificates where the identification of the organisation in the subject has been verified by the CA}}
+\newglossaryentry{p:pem}{type=pki, name={PEM}, description={An ASCII base 64 encoded file used for storing certificates and private keys}}
+\newglossaryentry{p:der}{type=pki, name={DER}, description={A binary encoding used for, among other things, certificates and keys. Stands for Distinguished Encoding Rules for ASN.1}}
+\newglossaryentry{p:pin}{type=pki, name={Pinning}, description={The process of validating a certificate against a known public key or certificate stored in ahead of time. Allows clients to provide additional assurances as to the validity of a certificate, as generally any certificate signed by any CA is valid}}
+\newglossaryentry{p:pinset}{type=pki, name={Pinset}, description={A set of pins for multiple end entity, intermediate and root certificates}}
+\newglossaryentry{p:root}{type=pki, name={Root Certificate}, description={A certificate stored in a trust store, representing the end of a chain. These are usually self-signed, unless signed by another CA}}
+\newglossaryentry{p:san}{type=pki, name={Subject Alternative Name}, description={An X.509 extension used to hold alternative host names valid for a certificate. Useful for virtual servers and subdomains}}
+\newglossaryentry{p:selfsigned}{type=pki, name={Self-signed Certificate}, description={A certificate whose signature has been generated by using its own private key}}
+\newglossaryentry{p:x509}{type=pki, name={X.509}, description={A standard certificate format widely supported in PKI}}
+\newglossaryentry{p:pki}{type=pki, name={Public Key Infrastructure}, description={(PKI) is a standardised set of policies and file formats for the management and use of public key certificate.}}
+
+% Transport Layer Security
+\newglossaryentry{t:ssl}{type=tls, name={Secure Socket Layer}, description={(SSL) is a protocol that was a predecessor to TLS. Developed starting in 1994 by Netscape, only SSL3 bears resemblance to modern TLS. It is common for the acronyms TLS and SSL to be used interchangeably, but strictly speaking SSL is deprecated}}
+\newglossaryentry{t:tls}{type=tls, name={Transport Layer Security}, description={(TLS) is a modern version of the SSL3 protocol, that has now undergone significate revisions and improvements. Currently on version 1.3}}
+\newglossaryentry{t:hshk}{type=tls, name={Handshake}, description={A series of defined messages in TLS that establish the security parameters of a session between two parties. Contain, among others, the ClientHello, ServerHello, Certificate, and Finished messages}}
+\newglossaryentry{t:rec}{type=tls, name={Record}, description={The common data structure for transport of any TLS message. Contains a header holding the type of the message, the version number, and the length of the payload. The payload itself is treaded as opaque, with the record unchanged regardless of the contents. Record contents may or may not be encrypted. }}
+\newglossaryentry{t:alert}{type=tls, name={Alert}, description={A TLS subprotocol (21). Indicates a notification or fatal error. Contains a byte for the message type, and a byte for the description index}}
+\newglossaryentry{t:hshkm}{type=tls, name={Handshake (Message)}, description={A TLS subprotocol (22). A handshake message that contains its own sub header indicating the type of message. Examples are ClientHello, ServerHello, Certificate, Finished}}
+\newglossaryentry{t:ccs}{type=tls, name={ChangeCipherSpec}, description={A TLS subprotocol (20). Indicates a party is to begin encrypting under a new set of keys and parameters. Used as part of a TLS 1.2 handshake, but not used in TLS1.3}}
+\newglossaryentry{t:ver}{type=tls, name={Version}, description={Two bytes indicating the major and minor TLS version numbers. TLS was seen as SSL3.1, thus TLS 1.0 had version number 3\_1. The later versions are 3\_2 (TLS 1.1), 3\_3 (TLS 1.2) and 3\_4 (TLS 1.3)}}
+\newglossaryentry{t:suite}{type=tls, name={Cipher Suite}, description={A string representing the selected ciphers and other algorithms used during an encrypted session. An example would be TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256. From TLS 1.3, key exchange and authentication suites are separated and passed as extensions}}
+\newglossaryentry{t:premaster}{type=tls, name={Pre-master Secret}, description={The shared secret derived from the client and server key exchange messages}}
+\newglossaryentry{t:master}{type=tls, name={Master Secret}, description={A shared master secret derived from the combination of the pre-master secret, the client and server random values (nonces). These bytes are used to derive all key material required for a session}}
+\newglossaryentry{t:nonce}{type=tls, name={Client / Server Nonce}, description={Random values passed during the client and server hello messages. They are used to prevent replay attacks, where messages are re-sent later}}
+\newglossaryentry{t:ext}{type=tls, name={Extensions}, description={Optional additional data that may be sent within a TLS message. Originally extensions were optional, but some have become inbuilt into the protocol, particularly in TLS 1.3}}
+\newglossaryentry{t:fin}{type=tls, name={Finished}, description={A handshake message indicating the end of the handshake protocol. Contains a MAC of all previous handshake messages, ensuring both the client and server have seen the same set of messages}}
+\newglossaryentry{t:openssl}{type=tls, name={OpenSSL}, description={A widely used implementation of SSL/TLS. It forms the backend for many packages that offer TLS, and also provides CA, X509 and other related PKI functionality}}
+\newglossaryentry{t:reneg}{type=tls, name={Renegotiation}, description={Reestablishment of session parameters such as keys during a session. All TLS sessions will renegotiate from time to time to provide forward secrecy. Renegotiation can also be used to request a client certificate that wasn’t required before. In TLS 1.3 renegotiation isn’t supported in this way via ClientHello messages. Instead KeyUpdate and CertificateRequest messages}}
+\newglossaryentry{t:appdata}{type=tls, name={Application Data}, description={A TLS subprotocol (23). Used to send any standard application data under whatever current encryption has been arranged}}
+\newglossaryentry{t:https}{type=tls, name={HTTPS}, description={A common use case for TLS, encrypted web connections using HTTP are known as HTTPS connections. Although this is the primary use case for TLS, it is by no means the only one}}
+\newglossaryentry{t:0rtt}{type=tls, name={0-RTT}, description={A handshake protocol supported in TLS 1.3. If a pre-shared key is available, the client can send this during the handshake, and immediately begin sending encrypted application data. Note: This doesn't protect against replay attacks, so should be used for read operations from the server only.}}
+
+
+\glsaddall
+
+% Print the glossaries
+\printglossary[type=crypto, style=altlist]
+\printglossary[type=pki, style=altlist]
+\printglossary[type=tls, style=altlist]
+\printglossary
+ 
+\end{document}
