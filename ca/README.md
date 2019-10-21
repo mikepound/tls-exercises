@@ -209,3 +209,25 @@ Create a DER encoded version of the certificate too
 openssl x509 -in intermediate\certs\server.ed25519.cert.pem
     -out intermediate\certs\server.ed25519.cert.der
 ```
+
+## Testing a Server Handshake
+It can be tricky to work out what's going wrong in a handshake, whether it's a certificate problem or a problem with your server or client setup. OpenSSL has a test client that is really useful in this case. The `openssl s_client` command lets us connect to a server and view detailed debugging information.
+```
+openssl s_client -CAfile ca.cert.pem localhost:8282
+```
+This command will connect to a server using a root certificate, and verify a successful handshake. Once connected, you can send and receive data from the command line.
+
+```
+openssl s_client -debug -CAfile ca.cert.pem localhost:8282
+```
+The `-debug` flag produces significantly more output information.
+
+```
+openssl s_client -tls1_3 -CAfile ca.cert.pem localhost:8282
+```
+You can add additional parameters such as `-tls1_3` for negotiate specific protocols and ciphers, for testing.
+
+```
+openssl s_client -tlsextdebug –state -CAfile ca.cert.pem localhost:8282
+```
+The `-tlsextdebug` flag produces more information on extensions in use.
