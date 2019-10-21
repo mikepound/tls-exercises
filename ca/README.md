@@ -175,7 +175,11 @@ openssl verify -CAfile ca-chain.cert.pem server.cert.pem
 server.cert.pem: OK
 ```
 
-Note that the ca-chain file will contain both the root and intermediate keys. Or any keys necessary to complete the chain.
+Note that the ca-chain file will contain both the root and intermediate keys. Or any keys necessary to complete the chain. This can help you verify the chain is valid between the server certificate and those certificates in the rest of the chain. If you have a trusted root certificate, you can use this command to verify a chain:
+
+```
+openssl verify -CAfile ca.cert.pem -untrusted int.cert.pem server.cert.pem
+```
 
 ## Ed25519 Certificates
 Edward's curve certificates use a form of elliptic-curve cryptography. Signatures based on them are modern, efficient, and secure. There is one Ed25519 server certificate signed in the repository. It's not used during the exercises, it's purely here as an example. They make a good option as long as the connecting clients support them. These are the commands I used to generate the certificate:
