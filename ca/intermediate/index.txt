@@ -5,3 +5,6 @@ V	200608232103Z		1003	unknown	/C=GB/ST=England/O=Expert TLS Ed/OU=IT Training/CN
 V	210704171850Z		1004	unknown	/C=GB/ST=England/O=Expert TLS/OU=IT Training/CN=Expert TLS Server
 V	210704171913Z		1005	unknown	/C=GB/ST=England/O=Expert TLS/OU=IT Training/CN=Expert TLS Imposter
 V	210704173752Z		1006	unknown	/C=GB/ST=England/O=Expert TLS/OU=IT Training/CN=Expert TLS Client
+V	221007124806Z		1007	unknown	/C=GB/ST=England/O=Expert TLS/OU=IT Training/CN=Expert TLS Server
+V	221007124831Z		1008	unknown	/C=GB/ST=England/O=Expert TLS/OU=IT Training/CN=Expert TLS Imposter
+V	221007124843Z		1009	unknown	/C=GB/ST=England/O=Expert TLS/OU=IT Training/CN=Expert TLS Client
