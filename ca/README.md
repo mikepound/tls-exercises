@@ -200,8 +200,8 @@ openssl req -config intermediate/openssl.cfg
 Sign using the intermediate CA
 ```
 openssl ca -config intermediate/openssl.cfg -extensions server_cert -days 375
-    -notext -md sha256 -in intermediate/csr/server.csr.pem
-    -out intermediate/certs/server.cert.pem
+    -notext -md sha256 -in intermediate/csr/server.ed25519.csr.pem
+    -out intermediate/certs/server.ed25519.cert.pem
 ```
 
 Create a DER encoded version of the certificate too
