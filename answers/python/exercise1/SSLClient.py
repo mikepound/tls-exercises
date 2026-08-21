@@ -21,7 +21,9 @@ def main():
     context.load_verify_locations(CA_CERT)
     
     # Restrict available protocols and ciphers
-    context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_SSLv3
+    context.minimum_version = ssl.TLSVersion.TLSv1_2
+
+    # As with the server, this is no longer required
     context.set_ciphers('ALL:!DSS:!DHE:!aNULL:!eNull')
 
     # We can wrap in an SSL context first, then connect

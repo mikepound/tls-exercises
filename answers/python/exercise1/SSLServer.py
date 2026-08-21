@@ -21,7 +21,10 @@ class SSLServer:
         """
         context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
         context.load_cert_chain(certfile=SERVER_CERT_CHAIN, keyfile=SERVER_KEY)
-        context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_SSLv3
+        context.minimum_version = ssl.TLSVersion.TLSv1_2
+
+        # In modern python SSL this line is no longer necessary - create_default_context() provides
+        # strong ciphers. I am leaving it here for interest.
         context.set_ciphers('ALL:!DSS:!DHE:!aNULL:!eNull')
         self.context = context
 
